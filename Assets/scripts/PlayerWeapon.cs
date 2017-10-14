@@ -33,10 +33,14 @@ public class PlayerWeapon : MonoBehaviour
     GameObject laserPoint;
     [SerializeField]
     GameObject myoManger;
+    [SerializeField]
+    GameObject shield;
 
     private ThalmicMyo myo;
     private bool canfire = true;
     private bool chargingShot = false;
+    private bool shieldOpen = false;
+    private Animator shieldAnim;
     private Pose lastPose;
     private GameObject tempBullet = null;
     private LineRenderer laser;
@@ -56,6 +60,9 @@ public class PlayerWeapon : MonoBehaviour
         initialScale = bullet.transform.localScale.x;
         //Set lineRenderer laser
         laser = GetComponent<LineRenderer>();
+        //Set shield scale & anim
+
+        shieldAnim = shield.GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -65,7 +72,7 @@ public class PlayerWeapon : MonoBehaviour
         //Debug.Log(myo.pose);
 
         //Scale bullet when charging
-        if (chargingShot)
+        if (chargingShot && tempBullet != null)
         {
             //Make bullet follow gunPoint
             tempBullet.transform.position = gunPoint.transform.position;
@@ -103,6 +110,19 @@ public class PlayerWeapon : MonoBehaviour
             laser.SetPosition(1, shootRay.origin + shootRay.direction * 100.0f);
         }
 
+        //Shield check
+        if (transform.eulerAngles.x < 300.0f && transform.eulerAngles.x > 200.0f && !shieldOpen)
+        {
+            shieldOpen = true;
+            shieldAnim.SetBool("shieldOpen", shieldOpen);
+        }
+        else if (transform.eulerAngles.x > 300.0f && shieldOpen)
+        {
+            shieldOpen = false;
+            shieldAnim.SetBool("shieldOpen", shieldOpen);
+        }
+        //Debug.Log(transform.eulerAngles.x);
+
         //Set last pose for next update tick
         lastPose = myo.pose;
     }
@@ -110,21 +130,22 @@ public class PlayerWeapon : MonoBehaviour
 
     private void ShootBullet()
     {
-        //Disable charging and firerate control
-        chargingShot = false;
-        canfire = false;
-        Invoke("EnableFire", firerate);
-
         //Shoot bullet
         GameObject shotBullet = Instantiate(bullet, gunPoint.transform.position, Quaternion.identity);
         shotBullet.transform.localScale = tempBullet.transform.localScale;
         shotBullet.GetComponent<Rigidbody>().AddForce(transform.forward.normalized * bulletForce, ForceMode.Impulse);
         Destroy(tempBullet);
+
+        //Disable charging and firerate control
+        chargingShot = false;
+        canfire = false;
+        Invoke("EnableFire", firerate);
+
     }
 
     private void FixedUpdate()
     {
-        if (chargingShot)
+        if (chargingShot && tempBullet != null)
         {
             //I reuse x value since y and z are the same -> tiny memory allocation optimization
             if (tempBullet.transform.localScale.x < maxScale) tempBullet.transform.localScale = new Vector3(tempBullet.transform.localScale.x + scaleFactor,
