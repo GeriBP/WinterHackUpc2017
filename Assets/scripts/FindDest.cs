@@ -24,14 +24,11 @@ public class FindDest : MonoBehaviour {
 		transform.GetComponent<UnityEngine.AI.NavMeshAgent>().destination = target;
 	}
 
-	void OnTriggerEnter(Collider other) {
+	void TakeDamage(float dmg) {
+		hp -= dmg;
 		if (hp <= 0.0f) {
-			Death();
-		} else if (other.tag == "boolet") {
-			hp -= damageHP;
-			//hp -= other.transform.gameObject.GetComponent<>;
+			Death ();
 		}
-		Destroy(other.gameObject);
 	}
 
 	void Death() {
