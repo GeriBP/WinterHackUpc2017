@@ -16,6 +16,13 @@ public class Ghost : MonoBehaviour {
     float flightMax;
     [SerializeField]
     float firerate;
+    [SerializeField]
+    float bulletSpeed;
+    [Header("Ghost gameobjects")]
+    [SerializeField]
+    GameObject bullet;
+    [SerializeField]
+    GameObject gunPoint;
     public Vector3 iniCenter, iniSize;
     public Vector3 endCenter, endSize;
 
@@ -69,7 +76,9 @@ public class Ghost : MonoBehaviour {
                 {
                     canfire = false;
                     Invoke("EnableFire", firerate);
-                    //Instantiate
+                    GameObject tmp = Instantiate(bullet, gunPoint.transform.position, Quaternion.identity);
+                    tmp.GetComponent<Rigidbody>().AddForce((player.transform.position - gunPoint.transform.position).normalized
+                        * bulletSpeed, ForceMode.Impulse);
                 }
             break;
         }
