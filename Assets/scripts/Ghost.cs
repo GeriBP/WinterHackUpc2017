@@ -77,6 +77,7 @@ public class Ghost : MonoBehaviour {
                     canfire = false;
                     Invoke("EnableFire", firerate);
                     GameObject tmp = Instantiate(bullet, gunPoint.transform.position, Quaternion.identity);
+					
                     tmp.GetComponent<Rigidbody>().AddForce((player.transform.position - gunPoint.transform.position).normalized
                         * bulletSpeed, ForceMode.Impulse);
                 }
@@ -92,6 +93,18 @@ public class Ghost : MonoBehaviour {
            (Random.value - 0.5f) * size.z
         );
     }
+
+	void TakeDamage(float dmg) {
+		hp -= dmg;
+		if (hp <= 0.0f) {
+			Death ();
+		}
+	}
+
+	void Death() {
+		//Particle system goes here
+		Destroy (this.gameObject);
+	}
 
     void EnableFire()
     {

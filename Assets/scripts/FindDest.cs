@@ -35,4 +35,8 @@ public class FindDest : MonoBehaviour {
 		//Particle system goes here
 		Destroy (this.gameObject);
 	}
+
+	void FixedUpdate() {
+		transform.LookAt(transform.position + transform.GetComponent<UnityEngine.AI.NavMeshAgent>().velocity);
+	}
 }

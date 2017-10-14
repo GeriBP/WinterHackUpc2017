@@ -9,7 +9,7 @@ public class bulletPlayer : MonoBehaviour {
     {
         if (other.tag == "enemy")
         {
-            other.gameObject.SendMessage("TakeDamage",damage);
+            other.gameObject.SendMessage("TakeDamage", damage);
         }
         //Instantiate PS
         Destroy(gameObject);
