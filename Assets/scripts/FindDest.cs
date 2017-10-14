@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class FindDest : MonoBehaviour {
 
-	public Transform destination;
+	public Transform portal_1;
+	public Transform portal_2;
 
 	// Use this for initialization
 	void Start () {
@@ -13,6 +14,7 @@ public class FindDest : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		transform.GetComponent<UnityEngine.AI.NavMeshAgent>().destination = destination.position;﻿
+		transform.GetComponent<UnityEngine.AI.NavMeshAgent>().destination = 
+		 Vector3.Min(portal_1.position, portal_2.position);﻿
 	}
 }
