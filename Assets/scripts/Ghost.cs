@@ -44,7 +44,6 @@ public class Ghost : MonoBehaviour {
         transform.position = spawnPoint;
         myRb = GetComponent<Rigidbody>();
         player = GameObject.Find("Camera");
-        InvokeRepeating("lookPlayer", 0.0f, 0.2f);
         myAnim = GetComponent<Animator>();
         Debug.Log(spawnPoint);
         Debug.Log(flightPoint);
@@ -53,6 +52,7 @@ public class Ghost : MonoBehaviour {
 	
 	// Update is called once per frame
 	void FixedUpdate () {
+        transform.LookAt(player.transform);
         switch (stage)
         {
             case 0:
@@ -72,6 +72,7 @@ public class Ghost : MonoBehaviour {
                 }
                 break;
             case 2:
+                myRb.velocity = Vector3.zero;
                 if (canfire)
                 {
                     canfire = false;
@@ -96,10 +97,5 @@ public class Ghost : MonoBehaviour {
     void EnableFire()
     {
         canfire = true;
-    }
-
-    void lookPlayer()
-    {
-        transform.LookAt(player.transform);
     }
 }
