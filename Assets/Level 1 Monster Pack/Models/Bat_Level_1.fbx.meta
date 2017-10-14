@@ -111,6 +111,11 @@ ModelImporter:
     resampleCurves: 1
     optimizeGameObjects: 0
     motionNodeName: 
+<<<<<<< HEAD
+=======
+    rigImportErrors: 
+    rigImportWarnings: 
+>>>>>>> f2627d63b0e8f0a9136b2dc62f321b20562a79f1
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 
@@ -373,7 +378,11 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
+<<<<<<< HEAD
       loopTime: 0
+=======
+      loopTime: 1
+>>>>>>> f2627d63b0e8f0a9136b2dc62f321b20562a79f1
       loopBlend: 0
       loopBlendOrientation: 1
       loopBlendPositionY: 1
@@ -747,6 +756,10 @@ ModelImporter:
   importAnimation: 1
   copyAvatar: 0
   humanDescription:
+<<<<<<< HEAD
+=======
+    serializedVersion: 2
+>>>>>>> f2627d63b0e8f0a9136b2dc62f321b20562a79f1
     human: []
     skeleton: []
     armTwist: 0.5
@@ -757,7 +770,14 @@ ModelImporter:
     legStretch: 0.05
     feetSpacing: 0
     rootMotionBoneName: Bat1Control
+<<<<<<< HEAD
     hasTranslationDoF: 0
+=======
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 0
+>>>>>>> f2627d63b0e8f0a9136b2dc62f321b20562a79f1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   animationType: 2
   humanoidOversampling: 1
