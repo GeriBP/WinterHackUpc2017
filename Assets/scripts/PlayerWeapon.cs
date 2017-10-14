@@ -19,6 +19,8 @@ public class PlayerWeapon : MonoBehaviour
     [SerializeField]
     float firerate;
     [SerializeField]
+    float damageBull;
+    [SerializeField]
     float maxScale;
     [SerializeField]
     float scaleFactor;
@@ -132,10 +134,12 @@ public class PlayerWeapon : MonoBehaviour
     {
         //Shoot bullet
         GameObject shotBullet = Instantiate(bullet, gunPoint.transform.position, Quaternion.identity);
-        shotBullet.transform.localScale = tempBullet.transform.localScale;
+        ParticleSystem.MainModule bulletPS = tempBullet.GetComponent<ParticleSystem>().main;
+        ParticleSystem.MainModule bulletPS2 = shotBullet.GetComponent<ParticleSystem>().main;
+        bulletPS2.startColor = new Color(bulletPS.startColor.color.r, bulletPS.startColor.color.g, bulletPS.startColor.color.b);
+        shotBullet.GetComponent<bulletPlayer>().damage = Mathf.Clamp((1-bulletPS.startColor.color.b), 0.25f, 1.0f) * damageBull;
         shotBullet.GetComponent<Rigidbody>().AddForce(transform.forward.normalized * bulletForce, ForceMode.Impulse);
         Destroy(tempBullet);
-
         //Disable charging and firerate control
         chargingShot = false;
         canfire = false;
@@ -144,12 +148,17 @@ public class PlayerWeapon : MonoBehaviour
     }
 
     private void FixedUpdate()
-    {
+   { 
         if (chargingShot && tempBullet != null)
         {
             //I reuse x value since y and z are the same -> tiny memory allocation optimization
-            if (tempBullet.transform.localScale.x < maxScale) tempBullet.transform.localScale = new Vector3(tempBullet.transform.localScale.x + scaleFactor,
-                tempBullet.transform.localScale.x + scaleFactor, tempBullet.transform.localScale.x + scaleFactor);
+            //if (tempBullet.transform.localScale.x < maxScale) tempBullet.transform.localScale = new Vector3(tempBullet.transform.localScale.x + scaleFactor,
+            //    tempBullet.transform.localScale.x + scaleFactor, tempBullet.transform.localScale.x + scaleFactor);
+            ParticleSystem.MainModule bulletPS = tempBullet.GetComponent<ParticleSystem>().main;
+            if (bulletPS.startColor.color.b > 0.0f)
+            {
+                bulletPS.startColor = new Color(bulletPS.startColor.color.r, bulletPS.startColor.color.g, bulletPS.startColor.color.b - scaleFactor);
+            }
             else
             {
                 //Bullet charged to max
