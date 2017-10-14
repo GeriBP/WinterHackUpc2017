@@ -15,7 +15,6 @@ public class FindDest : MonoBehaviour {
 		float rand = Random.Range(0.0f, 2.0f);
 		if (rand <= 1.0f) target = portal_1.transform.position;
 		else target = portal_2.transform.position;
-		transform.
 		transform.GetComponent<UnityEngine.AI.NavMeshAgent>().destination = target;
 	}
 }
