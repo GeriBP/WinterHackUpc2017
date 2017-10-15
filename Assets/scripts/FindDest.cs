@@ -12,7 +12,9 @@ public class FindDest : MonoBehaviour {
 	private GameObject portal_2;
 	private Vector3 target;
 	public float MaxScale = 1;
-    public GameObject deathPS;
+	public GameObject deathPS;
+	private AudioClip clip;
+
 
 	// Use this for initialization
 	void Start () {
@@ -23,6 +25,11 @@ public class FindDest : MonoBehaviour {
 		if (Vector3.Distance(transform.position, portal_1.transform.position) < Vector3.Distance(transform.position, portal_2.transform.position)) target = portal_1.transform.position;
 		else target = portal_2.transform.position;
 		transform.GetComponent<UnityEngine.AI.NavMeshAgent>().destination = target;
+
+		int i = (int) Mathf.Floor (Random.Range(0.0f, 6.0f));
+		string file0 = "Sounds/Dead";
+		string file = file0 + i.ToString();
+		clip = Resources.Load<AudioClip> (file);
 	}
 
 	public void TakeDamage(float dmg) {
@@ -34,6 +41,8 @@ public class FindDest : MonoBehaviour {
 
 	void Death() {
 		//Particle system goes here
+		AudioSource.PlayClipAtPoint(clip, gameObject.transform.position);
+
         GameObject.Instantiate(deathPS, transform.position, Quaternion.identity);
         GameObject.Find("GameManager").GetComponent<score>().modifyScore(5);
         Destroy (this.gameObject);
