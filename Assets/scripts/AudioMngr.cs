@@ -38,7 +38,7 @@ public class AudioMngr : MonoBehaviour {
 
 	public void Play(string name) {
 		for (int i = 0; i <= sounds.Length; ++i) {
-			if (sounds [i].name.Equals(name)) {
+			if (sounds[i].name == name) {
 				sounds[i].src.Play();
 				break;
 			}
