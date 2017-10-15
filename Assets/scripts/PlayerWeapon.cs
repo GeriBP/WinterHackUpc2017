@@ -26,7 +26,7 @@ public class PlayerWeapon : MonoBehaviour
     [SerializeField]
     float scaleFactor;
     public Animator animator;
-    public Text gameOverText;
+    public GameObject gameOverText;
     private float initialScale;
     [Header("GameObject references")]
     [SerializeField]
@@ -190,7 +190,7 @@ public class PlayerWeapon : MonoBehaviour
     void Death()
     {
         //Particle system goes here
-        gameOverText.enabled = true;
+        gameOverText.SetActive(true);
         GameObject.Find("GameManager").GetComponent<score>().tooMany();
         Destroy(gameObject);
 

@@ -13,7 +13,8 @@ public class FindDest : MonoBehaviour {
 	private Vector3 target;
 	public float MaxScale = 1;
 	public GameObject deathPS;
-	private AudioClip clip;
+    public AudioClip[] clip2;
+    private AudioClip clip;
 
 
 	// Use this for initialization
@@ -26,11 +27,9 @@ public class FindDest : MonoBehaviour {
 		else target = portal_2.transform.position;
 		transform.GetComponent<UnityEngine.AI.NavMeshAgent>().destination = target;
 
-		int i = (int) Mathf.Floor (Random.Range(0.0f, 6.0f));
-		string file0 = "Sounds/Dead";
-		string file = file0 + i.ToString();
-		clip = Resources.Load<AudioClip> (file);
-	}
+        int i = Random.Range(0, clip2.Length);
+        clip = clip2[i];
+    }
 
 	public void TakeDamage(float dmg) {
 		hp -= dmg;
