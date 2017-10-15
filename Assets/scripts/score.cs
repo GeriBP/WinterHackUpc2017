@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class score : MonoBehaviour {
 
     public TextMesh scoreText;
+    public Text textS;
     private int s = 0;
 
     public void Start()
@@ -38,6 +40,7 @@ public class score : MonoBehaviour {
 
     IEnumerator loadMenu()
     {
+        textS.text = "Score: " + s.ToString();
         yield return new WaitForSeconds(8.0f);
         SceneManager.LoadScene("menu");
         yield return null;

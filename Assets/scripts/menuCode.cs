@@ -27,6 +27,6 @@ public class menuCode : MonoBehaviour {
 
     private void go()
     {
-        SceneManager.LoadScene("tutorial");
+        SceneManager.LoadScene("main");
     }
 }
