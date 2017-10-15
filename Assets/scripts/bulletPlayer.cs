@@ -5,6 +5,7 @@ using UnityEngine;
 public class bulletPlayer : MonoBehaviour {
     [HideInInspector]
     public float damage;
+    public AudioClip clip;
     public GameObject deathPS;
     void OnTriggerEnter(Collider other)
     {
@@ -14,6 +15,7 @@ public class bulletPlayer : MonoBehaviour {
         }
         //Instantiate PS
         GameObject.Instantiate(deathPS, transform.position, Quaternion.identity);
+        AudioSource.PlayClipAtPoint(clip, gameObject.transform.position, 0.5f);
         Destroy(gameObject);
     }
 

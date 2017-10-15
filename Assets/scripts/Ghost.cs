@@ -109,7 +109,7 @@ public class Ghost : MonoBehaviour {
 
 	void Death() {
         //Particle system goes here
-		AudioSource.PlayClipAtPoint(clip, gameObject.transform.position);
+		AudioSource.PlayClipAtPoint(clip, gameObject.transform.position, 1.0f);
 
         GameObject.Instantiate(deathPS, transform.position, Quaternion.identity);
         GameObject.Find("GameManager").GetComponent<score>().modifyScore(10);

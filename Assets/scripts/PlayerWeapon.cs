@@ -40,6 +40,7 @@ public class PlayerWeapon : MonoBehaviour
     GameObject myoManger;
     [SerializeField]
     GameObject shield;
+    public AudioClip clip;
 
     private ThalmicMyo myo;
     private bool canfire = true;
@@ -149,7 +150,7 @@ public class PlayerWeapon : MonoBehaviour
         chargingShot = false;
         canfire = false;
         Invoke("EnableFire", firerate);
-
+        AudioSource.PlayClipAtPoint(clip, gameObject.transform.position, 0.1f);
     }
 
     private void FixedUpdate()
