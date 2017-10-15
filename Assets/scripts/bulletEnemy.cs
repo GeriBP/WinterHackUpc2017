@@ -8,7 +8,7 @@ public class bulletEnemy : MonoBehaviour {
     {
         if (other.tag == "Player")
         {
-            GameObject.Find("flamethrower").GetComponent<PlayerWeapon>().TakeDamage();
+            GameObject.Find("flamethrower").GetComponent<PlayerWeapon>().TakeDamage(2.0f);
         } else if (other.tag == "shield")
         {
             //ps

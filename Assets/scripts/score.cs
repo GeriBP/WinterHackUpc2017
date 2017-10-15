@@ -13,7 +13,8 @@ public class score : MonoBehaviour {
     }
     public void modifyScore(int score)
     {
-        int t = s + score;
+        s += score;
+        int t = s;
         if (t < 10)
         {
             scoreText.text = "000" + t.ToString();
