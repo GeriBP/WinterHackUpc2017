@@ -33,7 +33,11 @@ public class FindDest : MonoBehaviour {
 	}
 
 	void Death() {
-        //Particle system goes here
+		//Particle system goes here
+		float F = Mathf.Floor(Random.Range(1.0f, 7.0f));
+		int i = (int) F;
+		FindObjectOfType<AudioMngr>().PlaySound(i);
+
         GameObject.Instantiate(deathPS, transform.position, Quaternion.identity);
         Destroy (this.gameObject);
 	}

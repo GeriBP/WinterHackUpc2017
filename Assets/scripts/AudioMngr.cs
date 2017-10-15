@@ -57,4 +57,5 @@ public class AudioMngr : MonoBehaviour {
 
 /* USAGE
 	FindObjectOfType<AudioMngr>().Play(sound.name);
+	FindObjectOfType<AudioMngr>().PlayMusic(i);
 */

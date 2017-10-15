@@ -103,6 +103,10 @@ public class Ghost : MonoBehaviour {
 
 	void Death() {
         //Particle system goes here
+		float F = Mathf.Floor(Random.Range(8.0f, 13.0f));
+		int i = (int) F;
+		FindObjectOfType<AudioMngr>().PlaySound(i);
+
         GameObject.Instantiate(deathPS, transform.position, Quaternion.identity);
 		Destroy (this.gameObject);
 	}
