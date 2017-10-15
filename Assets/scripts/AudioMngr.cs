@@ -32,15 +32,23 @@ public class AudioMngr : MonoBehaviour {
 
 	public void PlaySound(int i) {
 		//if (0 <= i && i < sounds.GetLength) {
-			sounds [i].src.Play ();
+		sounds [i].src.Play ();
 		//}
 	}
 
-	// Update is called once per frame
 	public void Play(string name) {
 		for (int i = 0; i <= sounds.Length; ++i) {
 			if (sounds [i].name.Equals(name)) {
 				sounds[i].src.Play();
+				break;
+			}
+		}
+	}
+
+	public void Stop(string name) {
+		for (int i = 0; i <= sounds.Length; ++i) {
+			if (sounds [i].name.Equals(name)) {
+				sounds[i].src.Stop();
 				break;
 			}
 		}

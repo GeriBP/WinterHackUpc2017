@@ -93,7 +93,9 @@ public class PlayerWeapon : MonoBehaviour
             //canfire = false;
             //Invoke("EnableFire", firerate);
             chargingShot = true;
+			FindObjectOfType<AudioMngr>().Play("Charging");
             tempBullet = Instantiate(bullet, gunPoint.transform.position, Quaternion.identity);
+
             //tempBullet.GetComponent<Rigidbody>().AddForce(transform.forward.normalized * bulletForce, ForceMode.Impulse);
         }
 
@@ -117,11 +119,13 @@ public class PlayerWeapon : MonoBehaviour
         if (transform.eulerAngles.x <= 310.0f && transform.eulerAngles.x >= 275.0f && !shieldOpen)
         {
             shieldOpen = true;
+			FindObjectOfType<AudioMngr>().Play("Shield");
             shieldAnim.SetBool("shieldOpen", shieldOpen);
         }
         else if ((transform.eulerAngles.x > 310.0f || transform.eulerAngles.x < 275.0f) && shieldOpen)
         {
             shieldOpen = false;
+			FindObjectOfType<AudioMngr>().Stop("Shield");
             shieldAnim.SetBool("shieldOpen", shieldOpen);
         }
         //Debug.Log(transform.eulerAngles.x);
@@ -144,6 +148,8 @@ public class PlayerWeapon : MonoBehaviour
         Destroy(tempBullet);
         //Disable charging and firerate control
         chargingShot = false;
+		FindObjectOfType<AudioMngr>().Stop("Charging");
+		FindObjectOfType<AudioMngr>().Play("Gunshot");
         canfire = false;
         Invoke("EnableFire", firerate);
 
