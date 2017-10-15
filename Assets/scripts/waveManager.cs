@@ -19,7 +19,7 @@ public class waveManager : MonoBehaviour {
     {
         while (true)
         {
-            float enemy = Random.Range(0, 1);
+            float enemy = Random.Range(0.0f, 1.0f);
             if (enemy < slimeProb)
             {
                 int selSpwn = Random.Range(0, spawnpointSlime.Length);

@@ -24,7 +24,7 @@ public class FindDest : MonoBehaviour {
 		transform.GetComponent<UnityEngine.AI.NavMeshAgent>().destination = target;
 	}
 
-	void TakeDamage(float dmg) {
+	public void TakeDamage(float dmg) {
 		hp -= dmg;
 		if (hp <= 0.0f) {
 			Death ();

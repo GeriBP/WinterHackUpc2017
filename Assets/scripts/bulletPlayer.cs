@@ -14,4 +14,9 @@ public class bulletPlayer : MonoBehaviour {
         //Instantiate PS
         Destroy(gameObject);
     }
+
+    public void SetDamage(float f)
+    {
+        damage = f;
+    }
 }

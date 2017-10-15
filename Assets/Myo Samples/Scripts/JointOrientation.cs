@@ -41,7 +41,7 @@ public class JointOrientation : MonoBehaviour
         if (thalmicMyo.pose != _lastPose) {
             _lastPose = thalmicMyo.pose;
 
-            if (thalmicMyo.pose == Pose.WaveIn) {
+            if (thalmicMyo.pose == Pose.WaveOut) {
                 updateReference = true;
 
                 ExtendUnlockAndNotifyUserAction(thalmicMyo);

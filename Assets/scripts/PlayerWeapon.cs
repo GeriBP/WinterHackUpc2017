@@ -113,7 +113,7 @@ public class PlayerWeapon : MonoBehaviour
         }
 
         //Shield check
-        if (transform.eulerAngles.x < 300.0f && transform.eulerAngles.x > 200.0f && !shieldOpen)
+        if (transform.eulerAngles.x > 200.0f && !shieldOpen)
         {
             shieldOpen = true;
             shieldAnim.SetBool("shieldOpen", shieldOpen);
@@ -137,7 +137,8 @@ public class PlayerWeapon : MonoBehaviour
         ParticleSystem.MainModule bulletPS = tempBullet.GetComponent<ParticleSystem>().main;
         ParticleSystem.MainModule bulletPS2 = shotBullet.GetComponent<ParticleSystem>().main;
         bulletPS2.startColor = new Color(bulletPS.startColor.color.r, bulletPS.startColor.color.g, bulletPS.startColor.color.b);
-        shotBullet.GetComponent<bulletPlayer>().damage = Mathf.Clamp((1-bulletPS.startColor.color.b), 0.25f, 1.0f) * damageBull;
+        float tempf = Mathf.Clamp((1 - bulletPS.startColor.color.b), 0.25f, 1.0f) * damageBull;
+        shotBullet.GetComponent<bulletPlayer>().SetDamage(tempf);
         shotBullet.GetComponent<Rigidbody>().AddForce(transform.forward.normalized * bulletForce, ForceMode.Impulse);
         Destroy(tempBullet);
         //Disable charging and firerate control
@@ -168,5 +169,19 @@ public class PlayerWeapon : MonoBehaviour
     void EnableFire()
     {
         canfire = true;
+    }
+
+    public void TakeDamage()
+    {
+        currentHp -= 2.0f;
+        if (currentHp <= 0.5f)
+        {
+            Death();
+        }
+    }
+
+    void Death()
+    {
+        //Particle system goes here
     }
 }

@@ -45,9 +45,6 @@ public class Ghost : MonoBehaviour {
         myRb = GetComponent<Rigidbody>();
         player = GameObject.Find("Camera");
         myAnim = GetComponent<Animator>();
-        Debug.Log(spawnPoint);
-        Debug.Log(flightPoint);
-        Debug.Log(goalPoint);
     }
 	
 	// Update is called once per frame
@@ -69,6 +66,7 @@ public class Ghost : MonoBehaviour {
                     stage = 2;
                     myRb.velocity = Vector3.zero;
                     myAnim.SetBool("moving", false);
+                    myRb.drag = 1000;
                 }
                 break;
             case 2:
@@ -95,7 +93,7 @@ public class Ghost : MonoBehaviour {
         );
     }
 
-	void TakeDamage(float dmg) {
+	public void TakeDamage(float dmg) {
 		hp -= dmg;
 		if (hp <= 0.0f) {
 			Death ();
