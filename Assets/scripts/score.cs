@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class score : MonoBehaviour {
 
@@ -29,5 +30,16 @@ public class score : MonoBehaviour {
         {
             scoreText.text = t.ToString();
         }
+    }
+    public void tooMany()
+    {
+        StartCoroutine(loadMenu());
+    }
+
+    IEnumerator loadMenu()
+    {
+        yield return new WaitForSeconds(8.0f);
+        SceneManager.LoadScene("menu");
+        yield return null;
     }
 }

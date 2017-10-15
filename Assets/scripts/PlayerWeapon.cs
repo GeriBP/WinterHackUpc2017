@@ -5,6 +5,7 @@ using UnityEngine;
 using LockingPolicy = Thalmic.Myo.LockingPolicy;
 using Pose = Thalmic.Myo.Pose;
 using UnlockType = Thalmic.Myo.UnlockType;
+using UnityEngine.UI;
 
 public class PlayerWeapon : MonoBehaviour
 {
@@ -25,6 +26,7 @@ public class PlayerWeapon : MonoBehaviour
     [SerializeField]
     float scaleFactor;
     public Animator animator;
+    public Text gameOverText;
     private float initialScale;
     [Header("GameObject references")]
     [SerializeField]
@@ -176,6 +178,7 @@ public class PlayerWeapon : MonoBehaviour
     public void TakeDamage(float dmg)
     {
         currentHp -= dmg;
+        if (currentHp < 0.0f) currentHp = 0.0f;
         GameObject.Find("textLife").GetComponent<TextMesh>().text = currentHp.ToString() + "/10 HP";
         animator.SetTrigger("hit");
         if (currentHp <= 0.5f)
@@ -187,5 +190,9 @@ public class PlayerWeapon : MonoBehaviour
     void Death()
     {
         //Particle system goes here
+        gameOverText.enabled = true;
+        GameObject.Find("GameManager").GetComponent<score>().tooMany();
+        Destroy(gameObject);
+
     }
 }
