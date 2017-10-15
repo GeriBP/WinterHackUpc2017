@@ -24,6 +24,7 @@ public class PlayerWeapon : MonoBehaviour
     float maxScale;
     [SerializeField]
     float scaleFactor;
+    public Animator animator;
     private float initialScale;
     [Header("GameObject references")]
     [SerializeField]
@@ -81,7 +82,7 @@ public class PlayerWeapon : MonoBehaviour
         }
 
         //Fire on release fist
-        if (chargingShot && lastPose != Pose.Fist)
+        if (chargingShot && lastPose != Pose.Fist && tempBullet != null)
         {
             ShootBullet();
         }
@@ -113,12 +114,12 @@ public class PlayerWeapon : MonoBehaviour
         }
 
         //Shield check
-        if (transform.eulerAngles.x > 200.0f && !shieldOpen)
+        if (transform.eulerAngles.x <= 310.0f && transform.eulerAngles.x >= 275.0f && !shieldOpen)
         {
             shieldOpen = true;
             shieldAnim.SetBool("shieldOpen", shieldOpen);
         }
-        else if (transform.eulerAngles.x > 300.0f && shieldOpen)
+        else if ((transform.eulerAngles.x > 310.0f || transform.eulerAngles.x < 275.0f) && shieldOpen)
         {
             shieldOpen = false;
             shieldAnim.SetBool("shieldOpen", shieldOpen);
@@ -174,6 +175,8 @@ public class PlayerWeapon : MonoBehaviour
     public void TakeDamage()
     {
         currentHp -= 2.0f;
+        GameObject.Find("textLife").GetComponent<TextMesh>().text = currentHp.ToString() + "/10";
+        animator.SetTrigger("hit");
         if (currentHp <= 0.5f)
         {
             Death();
