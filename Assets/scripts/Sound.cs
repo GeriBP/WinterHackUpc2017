@@ -11,7 +11,7 @@ public class Sound {
 	[Range(0f, 1f)]
 	public float volume = 0.5f;
 	[Range(-3f, 3f)]
-	public float pitch = 1.0f;
+	public float pitch;
 
 	public bool loop;
 
@@ -20,7 +20,7 @@ public class Sound {
 
 	// Use this for initialization
 	void Start () {
-		
+		pitch = Random.Range (-3.0f, 3.0f);
 	}
 	
 	// Update is called once per frame
