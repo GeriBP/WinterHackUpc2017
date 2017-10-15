@@ -12,6 +12,7 @@ public class FindDest : MonoBehaviour {
 	private GameObject portal_2;
 	private Vector3 target;
 	public float MaxScale = 1;
+    public GameObject deathPS;
 
 	// Use this for initialization
 	void Start () {
@@ -32,8 +33,9 @@ public class FindDest : MonoBehaviour {
 	}
 
 	void Death() {
-		//Particle system goes here
-		Destroy (this.gameObject);
+        //Particle system goes here
+        GameObject.Instantiate(deathPS, transform.position, Quaternion.identity);
+        Destroy (this.gameObject);
 	}
 
 	void FixedUpdate() {

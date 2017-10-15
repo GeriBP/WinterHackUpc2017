@@ -25,6 +25,7 @@ public class Ghost : MonoBehaviour {
     GameObject gunPoint;
     public Vector3 iniCenter, iniSize;
     public Vector3 endCenter, endSize;
+    public GameObject deathPS;
 
     private Vector3 spawnPoint, goalPoint, flightPoint;
 
@@ -101,7 +102,8 @@ public class Ghost : MonoBehaviour {
 	}
 
 	void Death() {
-		//Particle system goes here
+        //Particle system goes here
+        GameObject.Instantiate(deathPS, transform.position, Quaternion.identity);
 		Destroy (this.gameObject);
 	}
 

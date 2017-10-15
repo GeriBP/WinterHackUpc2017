@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class bulletEnemy : MonoBehaviour {
-    [HideInInspector]
+    public GameObject deathPS;
     void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
@@ -12,6 +12,7 @@ public class bulletEnemy : MonoBehaviour {
         } else if (other.tag == "shield")
         {
             //ps
+            GameObject.Instantiate(deathPS, transform.position, Quaternion.identity);
         }
         //Instantiate PS
         Destroy(gameObject);

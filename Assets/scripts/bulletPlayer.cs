@@ -5,6 +5,7 @@ using UnityEngine;
 public class bulletPlayer : MonoBehaviour {
     [HideInInspector]
     public float damage;
+    public GameObject deathPS;
     void OnTriggerEnter(Collider other)
     {
         if (other.tag == "enemy")
@@ -12,6 +13,7 @@ public class bulletPlayer : MonoBehaviour {
             other.gameObject.SendMessage("TakeDamage", damage);
         }
         //Instantiate PS
+        GameObject.Instantiate(deathPS, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
 
