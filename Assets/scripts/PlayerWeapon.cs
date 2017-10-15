@@ -181,7 +181,7 @@ public class PlayerWeapon : MonoBehaviour
     public void TakeDamage()
     {
         currentHp -= 2.0f;
-        GameObject.Find("textLife").GetComponent<TextMesh>().text = currentHp.ToString() + "/10";
+        GameObject.Find("textLife").GetComponent<TextMesh>().text = currentHp.ToString() + "/10 HP";
         animator.SetTrigger("hit");
         if (currentHp <= 0.5f)
         {
